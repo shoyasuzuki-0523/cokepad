@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db/db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    ports:
+      - "3306:3306"
+
+  back:
+    build: ./back
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./back/src:/app_name
+      - bundle-data:/usr/local/bundle
+    ports:
+      - "3001:3000"
+    links:
+      - db
+
+  front:
+    build: ./front
+    command: yarn start
+    volumes:
+      - ./front:/app_name
+    ports:
+      - 3000:3000
+    tty: true
+
+volumes:
+  bundle-data:
+  db-data:
