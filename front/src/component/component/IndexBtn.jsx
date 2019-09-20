@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 class IndexBtn extends Component {
   cpIndex = () => {
-    this.props.history.push('/Index');
+    this.props.history.push('/');
   }
   
   render() {

@@ -1,7 +1,9 @@
 import React from 'react';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,12 +12,13 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import HomeBtn from '../component/HomeBtn';
-import AboutBtn from '../component/AboutBtn';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonIcon from '@material-ui/icons/Person';
 import IndexBtn from '../component/IndexBtn';
 import FormBtn from '../component/FormBtn';
 import SignInBtn from '../component/SignInBtn';
 import SignUpBtn from '../component/SignUpBtn';
+import ProfileBtn from '../component/ProfileBtn';
 import MainContainer from '../component/MainContainer';
 
 const drawerWidth = 240;
@@ -54,7 +57,7 @@ const signSplit = (props) => {
             </Button>
           </FormBtn>
         </Grid>
-        <Grid item>
+       <Grid item>
           <Button color="inherit" onClick={props.signOut}>
             ログアウト
           </Button>
@@ -83,6 +86,24 @@ const signSplit = (props) => {
           </SignUpBtn>
         </Grid>
       </Grid>
+    );
+  }
+}
+
+const drawerButton = (props) => {
+  if(props.sign){
+    return(
+      <div>
+        <Divider />
+        <ProfileBtn>
+          <ListItem button>
+            <Box component="span" mr={1}>
+              <PersonIcon/>
+            </Box>
+            <ListItemText primary={'プロフィール'} />
+          </ListItem>
+        </ProfileBtn>
+      </div>
     );
   }
 }
@@ -116,21 +137,15 @@ export default function ClippedDrawer(props) {
         >
           <div className={classes.toolbar} />
           <List>
-            <HomeBtn>
-              <ListItem button>
-                <ListItemText primary={'Home'} />
-              </ListItem>
-            </HomeBtn>
-            <AboutBtn>
-              <ListItem button>
-                <ListItemText primary={'About'} />
-              </ListItem>
-            </AboutBtn>
             <IndexBtn>
               <ListItem button>
-                <ListItemText primary={'Index'} />
+                <Box component="span" mr={1}>
+                  <HomeIcon/>
+                </Box>
+                <ListItemText primary={'ホーム'} />
               </ListItem>
             </IndexBtn>
+            {drawerButton(props)}
           </List>
         </Drawer>
       </Hidden>
