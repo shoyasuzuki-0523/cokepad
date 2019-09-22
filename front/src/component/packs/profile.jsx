@@ -10,7 +10,7 @@ class Profile extends Component {
   render(){
     return(
       <Paper>
-        <Typography variant="h3" component="h3">
+        <Typography variant="h4" component="h4">
           {this.props.currentUser.name}
         </Typography>
       </Paper>

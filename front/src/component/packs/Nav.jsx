@@ -14,6 +14,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import IndexBtn from '../component/IndexBtn';
 import FormBtn from '../component/FormBtn';
 import SignInBtn from '../component/SignInBtn';
@@ -47,22 +48,11 @@ const useStyles = makeStyles(theme => ({
 const signSplit = (props) => {
   if(props.sign){
     return(
-      <Grid container>
-        <Grid item>
-          <FormBtn>
-            <Button color="inherit">
-              <Typography  fontWeight="fontWeightBold">
-                投稿する
-              </Typography>
-            </Button>
-          </FormBtn>
-        </Grid>
-       <Grid item>
-          <Button color="inherit" onClick={props.signOut}>
-            ログアウト
-          </Button>
-        </Grid>
-      </Grid>
+      <FormBtn>
+        <Button variant="contained" color="inherit">
+          投稿する
+        </Button>
+      </FormBtn>
     );
   }else{
     return(
@@ -103,6 +93,12 @@ const drawerButton = (props) => {
             <ListItemText primary={'プロフィール'} />
           </ListItem>
         </ProfileBtn>
+        <ListItem button onClick={props.signOut}>
+          <Box component="span" mr={1}>
+            <ExitToAppIcon/>
+          </Box>
+          <ListItemText primary={'ログアウト'}/>
+        </ListItem>
       </div>
     );
   }

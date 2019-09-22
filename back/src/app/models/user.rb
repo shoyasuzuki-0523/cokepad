@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+  include Rails.application.routes.url_helpers
 
+  has_one_attached :avatar
   has_many :posts
+  
+  def avatar_url
+    avatar.attached? ?  url_for(avatar) : "https://api-rails-cokepad.s3-ap-northeast-1.amazonaws.com/19827.jpg"
+  end
 end

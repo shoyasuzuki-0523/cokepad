@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  require 'aws-sdk-s3'
 
   def index
     @posts = Post.all
@@ -8,6 +9,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(title: params[:title], content: params[:content], user_id: current_user.id)
+    presigned_url = put_presigned_url(params[:images])
     render 'post', formats: 'json', handlers: 'jbuilder'
   end
 
@@ -29,5 +31,19 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     render 'post', formats: 'json', handlers: 'jbuilder'
+  end
+
+  private
+
+  def put_presigned_url(object_name)
+    object = Aws::S3::Resource.new(:amazon).bucket('api-rails-cokepad').object(object_name)
+    url = URI.parse(object.presigned_url(:put, expires_in: 30))
+    return url
+  end
+
+  def get_presigned_url(object_name)
+    object = Aws::S3::Resource.new(:amazon).bucket('api-rails-cokepad').object(object_name)
+    url = URI.parse(object.presigned_url(:get, expires_in: 30))
+    return url
   end
 end
