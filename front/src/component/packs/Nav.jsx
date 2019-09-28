@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
@@ -49,7 +50,7 @@ const signSplit = (props) => {
   if(props.sign){
     return(
       <FormBtn>
-        <Button variant="contained" color="inherit">
+        <Button variant="contained" color="secondary">
           投稿する
         </Button>
       </FormBtn>
@@ -85,7 +86,7 @@ const drawerButton = (props) => {
     return(
       <div>
         <Divider />
-        <ProfileBtn>
+        <ProfileBtn id={props.currentUser.id}> 
           <ListItem button>
             <Box component="span" mr={1}>
               <PersonIcon/>
@@ -104,7 +105,7 @@ const drawerButton = (props) => {
   }
 }
 
-export default function ClippedDrawer(props) {
+export default withRouter(function ClippedDrawer(props) {
   const classes = useStyles();
 
   return (
@@ -151,4 +152,4 @@ export default function ClippedDrawer(props) {
       </main>
     </div>
   );
-}
+})

@@ -6,7 +6,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: @user, methods: [:avatar_url]
+    @good_posts = []
+    for @user.goods.each do |good|
+      @good_posts << good.post
+    end 
+    render 'show', formats: 'json', handlers: 'jbuilder'
   end
 
   def destroy

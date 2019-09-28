@@ -9,9 +9,10 @@ class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   has_one_attached :avatar
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :goods
   
   def avatar_url
-    avatar.attached? ?  url_for(avatar) : "https://api-rails-cokepad.s3-ap-northeast-1.amazonaws.com/19827.jpg"
+    avatar.attached? ?  url_for(avatar) : url_for("https://api-rails-cokepad.s3-ap-northeast-1.amazonaws.com/19827.jpg")
   end
 end
