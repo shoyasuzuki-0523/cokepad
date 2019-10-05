@@ -19,11 +19,7 @@ class MainContainer extends Component {
 
   componentDidMount(){
     console.log(this.props);
-<<<<<<< HEAD
     axios.get('http://localhost:3001/posts')
-=======
-    axios.get('http://192.168.99.100:3001/posts')
->>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
     .then((results) => {
       console.log(results)
       this.setState({posts: results.data})
