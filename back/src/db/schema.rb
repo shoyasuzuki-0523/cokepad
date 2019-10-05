@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_10_04_053500) do
+=======
+ActiveRecord::Schema.define(version: 2019_09_26_154020) do
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_10_04_053500) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+<<<<<<< HEAD
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
     t.integer "user_id"
@@ -41,6 +46,8 @@ ActiveRecord::Schema.define(version: 2019_10_04_053500) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
   create_table "goods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "user_id"
     t.string "post_id"

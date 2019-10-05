@@ -9,7 +9,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+<<<<<<< HEAD
 import List from '../component/List';
+=======
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -31,16 +34,24 @@ class Profile extends Component {
     super(props);
     this.state = {
       tab: 0,
+<<<<<<< HEAD
       user: {
         posts: [],
         goods: []
       },
+=======
+      user: {},
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
       avatar: ''
     };
   }
 
   componentDidMount(){
+<<<<<<< HEAD
     axios.get(`http://localhost:3001/users/${this.props.id}`)
+=======
+    axios.get(`http://192.168.99.100:3001/users/${this.props.id}`)
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
     .then((results) => {
       console.log(results)
       this.setState({user: results.data})
@@ -111,10 +122,19 @@ class Profile extends Component {
           </Tabs>
         </AppBar>
         <TabPanel value={this.state.tab} index={0}>
+<<<<<<< HEAD
           <List posts={this.state.user.posts} />
         </TabPanel>
         <TabPanel value={this.state.tab} index={1}>
           <List posts={this.state.user.goods}/>
+=======
+          ここは投稿一覧です。<br />
+          あなたの投稿が表示されます。
+        </TabPanel>
+        <TabPanel value={this.state.tab} index={1}>
+          ここはいいね！一覧です。<br />
+          あたがいいね！した投稿が表示されます。
+>>>>>>> b561f8e94dbedb09885001e984577885a46b2ca9
         </TabPanel>
         <TabPanel value={this.state.tab} index={2}>
           ここはコメント一覧です。<br />
