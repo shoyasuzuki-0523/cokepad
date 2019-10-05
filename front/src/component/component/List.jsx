@@ -8,7 +8,7 @@ class List extends Component {
     if (this.props.posts.length === 0){
       return(
         <Typography variant="h6" component="h2">
-          まだなにも投稿されていません。
+          投稿が見つかりませんでした。
         </Typography>
       );
     }

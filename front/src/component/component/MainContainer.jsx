@@ -17,8 +17,9 @@ class MainContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://192.168.99.100:3001/posts')
+  componentDidMount(){
+    console.log(this.props);
+    axios.get('http://localhost:3001/posts')
     .then((results) => {
       console.log(results)
       this.setState({posts: results.data})
@@ -29,7 +30,7 @@ class MainContainer extends Component {
   }
 
   createPost = (title, content) => {
-    axios.post('http://192.168.99.100:3001/posts',{title: title, content: content}, {headers: this.props.token})
+    axios.post('http://localhost:3001/posts',{title: title, content: content}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
       const newData = update(this.state.posts, {$push:[response.data]});
@@ -42,7 +43,7 @@ class MainContainer extends Component {
   }
 
   deletePost = (id) => {
-    axios.delete(`http://192.168.99.100:3001/posts/${id}`,{headers: this.props.token, data: {}})
+    axios.delete(`http://localhost:3001/posts/${id}`,{headers: this.props.token, data: {}})
     .then((response) => {
       console.log(response)
       const postIndex = this.state.posts.findIndex(post => post.id === parseInt(id, 10))
@@ -56,7 +57,7 @@ class MainContainer extends Component {
   }
 
   updatePost = (id, title, content) => {
-    axios.patch(`http://192.168.99.100:3001/posts/${id}`,{title: title, content: content}, {headers: this.props.token})
+    axios.patch(`http://localhost:3001/posts/${id}`,{title: title, content: content}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
       const postIndex = this.state.posts.findIndex((x) => x.id === parseInt(id, 10))
@@ -74,10 +75,10 @@ class MainContainer extends Component {
       <div>
         <Container fixed>
           <Route exact path='/' render={ () => <Index posts={this.state.posts} getPosts={this.getPosts} createPost={this.createPost} />}/>
-          <Route exact path="/posts/:id/show" render={ ({match}) => <Show deletePost={this.deletePost} match={match} currentUser={this.props.currentUser}/> }/>
+          <Route exact path="/posts/:id/show" render={ ({match}) => <Show token={this.props.token} deletePost={this.deletePost} match={match} currentUser={this.props.currentUser}/> }/>
           <Route exact path='/posts/:id/update' render={ ({match}) => <Update updatePost={this.updatePost} match={match}/>}/>
+          <Route path='/Profile/:id' render={({match}) => <Profile match={match} id={this.props.currentUser.id}/>}/>
           <Route path='/Form' render={() => <Form createPost={this.createPost} />}/>
-          <Route path='/Profile' render={() => <Profile currentUser={this.props.currentUser}/>}/>
         </Container>
       </div>
     );

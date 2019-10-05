@@ -9,7 +9,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.create(title: params[:title], content: params[:content], user_id: current_user.id)
-    presigned_url = put_presigned_url(params[:images])
     render 'post', formats: 'json', handlers: 'jbuilder'
   end
 
@@ -30,6 +29,11 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @goods = @post.goods
+    @good_users = []
+    for good in @goods do
+      @good_users.push(good.user)
+    end
     render 'post', formats: 'json', handlers: 'jbuilder'
   end
 

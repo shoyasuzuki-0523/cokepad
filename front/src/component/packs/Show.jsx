@@ -5,28 +5,55 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 class Show extends Component {
   constructor(props){
     super(props);
     this.state = {
-      post: {user: {}},
-      date: ''
+      post: {
+        user: {},
+        goods: {},
+      },
+      goodCount: 0,
+      btnState: false,
+      date: '',
     };
+    this.goodOn = this.goodOn.bind(this);
+    this.goodOff = this.goodOff.bind(this);
+  }
+
+  componentDidMount(){
     axios
-    .get(`http://192.168.99.100:3001/posts/${this.props.match.params.id}`)
+    .get(`http://localhost:3001/posts/${this.props.match.params.id}`)
     .then((results) => {
       console.log(results);
+
       var t = new Date(results.data.created_at);
       var year  = t.getFullYear();
       var month = t.getMonth() + 1;
       var day   = t.getDate();
-      var date = year + "/" + month + "/" + day
-      console.log(results.data.user.id)
-      this.setState({post: results.data, date: date});
+      var date = year + "/" + month + "/" + day;
+
+      const goods = results.data.goods;
+      const filterGood = goods.filter((item, index) => {
+        if(item.id === this.props.currentUser.id) return true
+      });
+      if(filterGood.length === 0){
+        this.setState({btnState: false});
+      }else{
+        this.setState({btnState: true});
+      }
+
+      this.setState({
+        post: results.data,
+        date: date,
+        goodCount: Object.keys(this.state.post.goods).length
+      });
     })
     .catch((data) =>{
       console.log(data);
@@ -39,6 +66,36 @@ class Show extends Component {
 
   editPost = () => {
     this.props.history.push(`/posts/${this.props.match.params.id}/update`);
+  }
+
+  goodOn = () => {
+    axios
+    .post(`http://localhost:3001/goods`,{id: this.state.post.id}, {headers: this.props.token})
+    .then((results) => {
+      console.log(results);
+      this.setState({
+        btnState: true,
+        goodCount: this.state.goodCount + 1
+      });
+    })
+    .catch((data) => {
+      console.log(data);
+    });
+  }
+
+  goodOff = () => {
+    axios
+    .delete(`http://localhost:3001/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
+    .then((results) => {
+      console.log(results)
+      this.setState({
+        btnState: false,
+        goodCount: this.state.goodCount - 1
+      });
+    })
+    .catch((data) => {
+      console.log(data);
+    });
   }
 
   editButton = (postUserId, currentUserId) => {
@@ -60,7 +117,32 @@ class Show extends Component {
     }
   }
 
+  goodBtn = (id) => {
+    if(id != null){
+      if(this.state.btnState){
+        return(
+          <Button variant="contained" color="primary" onClick={this.goodOff}>
+            <ThumbUpIcon/>
+          </Button>
+        );
+      }else{
+        return(
+          <Button variant="outlined" onClick={this.goodOn}>
+            <ThumbUpIcon/>
+          </Button>
+        );
+      }
+    }else{
+      return(
+        <Button variant="outlined">
+          <ThumbUpIcon/>
+        </Button>
+      );
+    }
+  }
+
   render(){
+    console.log(this.state);
     const classes = makeStyles({
       card: {
         minWidth: 275,
@@ -103,6 +185,16 @@ class Show extends Component {
           <Typography color="textSecondary" >
             {this.state.date}
           </Typography>
+          <Box my={2}>
+            <Grid container justify="flex-start">
+              <Grid item>
+                {this.goodBtn(this.props.currentUser.id)}
+              </Grid>
+              <Grid item>
+                {Object.keys(this.state.post.goods).length}
+              </Grid>
+            </Grid>
+          </Box>
           <Typography variant="h6" component="p">
             {this.state.post.content}
           </Typography>
