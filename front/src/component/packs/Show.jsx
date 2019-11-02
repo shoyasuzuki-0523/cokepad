@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'react-addons-update';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import CommentForm from '../component/CommentForm';
 
 class Show extends Component {
   constructor(props){
@@ -18,6 +20,7 @@ class Show extends Component {
       post: {
         user: {},
         goods: {},
+        comments: {}
       },
       goodCount: 0,
       btnState: false,
@@ -29,7 +32,7 @@ class Show extends Component {
 
   componentDidMount(){
     axios
-    .get(`http://localhost:3001/posts/${this.props.match.params.id}`)
+    .get(`http://192.168.99.100:3001/posts/${this.props.match.params.id}`)
     .then((results) => {
       console.log(results);
 
@@ -68,9 +71,22 @@ class Show extends Component {
     this.props.history.push(`/posts/${this.props.match.params.id}/update`);
   }
 
+  createComment = (content, post_id) => {
+    axios.post('http://192.168.99.100:3001/comments',{content: content, post_id: post_id}, {headers: this.props.token})
+    .then((response) => {
+      console.log(response)
+      const newData = update(this.state.posts.comments, {$push:[response.data]});
+      this.setState({comments: newData});
+      this.props.history.push('/')
+    })
+    .catch((data) =>{
+      console.log(data);
+    });
+  }
+
   goodOn = () => {
     axios
-    .post(`http://localhost:3001/goods`,{id: this.state.post.id}, {headers: this.props.token})
+    .post(`http://192.168.99.100:3001/goods`,{id: this.state.post.id}, {headers: this.props.token})
     .then((results) => {
       console.log(results);
       this.setState({
@@ -85,7 +101,7 @@ class Show extends Component {
 
   goodOff = () => {
     axios
-    .delete(`http://localhost:3001/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
+    .delete(`http://192.168.99.100:3001/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
     .then((results) => {
       console.log(results)
       this.setState({
@@ -186,18 +202,17 @@ class Show extends Component {
             {this.state.date}
           </Typography>
           <Box my={2}>
-            <Grid container justify="flex-start">
-              <Grid item>
-                {this.goodBtn(this.props.currentUser.id)}
-              </Grid>
-              <Grid item>
-                {Object.keys(this.state.post.goods).length}
-              </Grid>
+            <Grid item>
+              {this.goodBtn(this.props.currentUser.id)}
             </Grid>
           </Box>
           <Typography variant="h6" component="p">
             {this.state.post.content}
           </Typography>
+        </CardContent>
+
+        <CardContent>
+          <CommentForm/>
         </CardContent>
       </Card>
     );
