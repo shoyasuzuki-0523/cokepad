@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-# 修正依頼がありましたので、追加しました。お手数おかけしました。
 gem 'omniauth'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
