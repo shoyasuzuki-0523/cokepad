@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CommentForm from '../component/CommentForm';
+// import Comment from '../component/Comment';
 
 class Show extends Component {
   constructor(props){
@@ -201,18 +202,23 @@ class Show extends Component {
           <Typography color="textSecondary" >
             {this.state.date}
           </Typography>
-          <Box my={2}>
-            <Grid item>
-              {this.goodBtn(this.props.currentUser.id)}
-            </Grid>
-          </Box>
+          <br/>
           <Typography variant="h6" component="p">
             {this.state.post.content}
           </Typography>
+          <br/><br/><br/>
+          <Box my={2}>
+            {this.goodBtn(this.props.currentUser.id)}
+          </Box>
         </CardContent>
 
+        <hr/>
+
         <CardContent>
-          <CommentForm/>
+          <h3>
+            コメントを書く
+          </h3>
+          <CommentForm createComment={this.createComment}/>
         </CardContent>
       </Card>
     );

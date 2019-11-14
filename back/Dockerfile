@@ -2,7 +2,7 @@
 # 19.01.20現在最新安定版のイメージを取得
 FROM ruby:2.6.3
 
-# 必要なパッケージのインストール（基本的に必要になってくるものだと思うので削らないこと）
+# 必要なパッケージのインストール
 RUN apt-get update -qq && \
     apt-get install -y build-essential \ 
                        libpq-dev \        

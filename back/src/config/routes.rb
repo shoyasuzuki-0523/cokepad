@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'comments/index'
-  get 'comments/create'
-  get 'comments/update'
-  get 'comments/destroy'
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'auth/registrations'
   }

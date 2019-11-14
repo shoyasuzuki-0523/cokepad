@@ -18,7 +18,7 @@ class CommentForm extends Component {
   };
 
   handleSubmit = () => {
-    return 0;
+    return this.props.createComment;
   }
 
   render(){
@@ -27,9 +27,9 @@ class CommentForm extends Component {
         <form noValidate autoComplete="off">
           <TextField
             id="outlined-multiline-static"
-            label="Content"
+            label="ここにコメントを書いてください"
             multiline
-            rows="30"
+            rows="3"
             fullWidth
             onChange={this.handleContentChange('content')}
             margin="normal"
