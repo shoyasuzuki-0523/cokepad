@@ -31,7 +31,7 @@ class Show extends Component {
     this.goodOff = this.goodOff.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount(){/*
     axios
     .get(`http://192.168.99.100:3001/posts/${this.props.match.params.id}`)
     .then((results) => {
@@ -62,7 +62,7 @@ class Show extends Component {
     .catch((data) =>{
       console.log(data);
     });
-  }
+  */}
 
   deletePost = () => {
     return this.props.deletePost(this.props.match.params.id)
@@ -72,7 +72,7 @@ class Show extends Component {
     this.props.history.push(`/posts/${this.props.match.params.id}/update`);
   }
 
-  createComment = (content, post_id) => {
+  createComment = (content, post_id) => {/*
     axios.post('http://192.168.99.100:3001/comments',{content: content, post_id: post_id}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
@@ -83,9 +83,9 @@ class Show extends Component {
     .catch((data) =>{
       console.log(data);
     });
-  }
+  */}
 
-  goodOn = () => {
+  goodOn = () => {/*
     axios
     .post(`http://192.168.99.100:3001/goods`,{id: this.state.post.id}, {headers: this.props.token})
     .then((results) => {
@@ -98,9 +98,9 @@ class Show extends Component {
     .catch((data) => {
       console.log(data);
     });
-  }
+  */}
 
-  goodOff = () => {
+  goodOff = () => {/*
     axios
     .delete(`http://192.168.99.100:3001/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
     .then((results) => {
@@ -113,7 +113,7 @@ class Show extends Component {
     .catch((data) => {
       console.log(data);
     });
-  }
+  */}
 
   editButton = (postUserId, currentUserId) => {
     if(currentUserId === postUserId){

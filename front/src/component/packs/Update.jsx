@@ -15,7 +15,7 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() {/*
     axios
       .get(`http://192.168.99.100:3001/posts/${this.props.match.params.id}`)
       .then((results) => {
@@ -26,7 +26,7 @@ class Form extends Component {
         console.log(data);
         return(<h1>not found(404)</h1>);
       });
-  }
+  */}
 
   handleChange = title => event => {
     this.setState({title: event.target.value});
