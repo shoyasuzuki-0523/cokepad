@@ -5,10 +5,9 @@ RUN mkdir /app_name
 ENV APP_ROOT /app_name 
 WORKDIR $APP_ROOT
 
-RUN npm install -g yarn
-RUN yarn add create-react-app
-RUN yarn add react-scripts
+RUN npm install -g create-react-app
+RUN npm install
 
 ADD . $APP_ROOT
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
