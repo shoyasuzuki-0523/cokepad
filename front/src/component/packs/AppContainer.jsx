@@ -15,7 +15,7 @@ class AppContainer extends Component {
     }
   }
 
-  signIn = (email, password) => {/*
+  signIn = (email, password) => {
     axios.post('http://192.168.99.100:3001/auth/sign_in',{
       email: email,
       password: password
@@ -38,9 +38,9 @@ class AppContainer extends Component {
     .catch((data) =>{
       console.log(data)
     })
-  */}
+  }
 
-  signUp = (name, email, password, passwordConfirmation) => {/*
+  signUp = (name, email, password, passwordConfirmation) => {
     axios.post('http://192.168.99.100:3001/auth',{
       name: name,
       email: email,
@@ -65,9 +65,9 @@ class AppContainer extends Component {
     .catch((data) =>{
       console.log(data)
     })
-  */}
+  }
 
-  signOut = () => {/*
+  signOut = () => {
     axios.delete('http://192.168.99.100:3001/auth/sign_out', {headers: this.state.token, data: {}})
     .then((response) => {
       console.log(response);
@@ -81,7 +81,7 @@ class AppContainer extends Component {
     .catch((data) =>{
       console.log(data)
     })
-  */}
+  }
 
   render() {
     return (

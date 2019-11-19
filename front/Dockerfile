@@ -10,4 +10,4 @@ RUN npm install
 
 ADD . $APP_ROOT
 
-CMD ["npm", "start"]
+CMD ["./node_modules/react-scripts/bin/react-scripts.js", "start"]
