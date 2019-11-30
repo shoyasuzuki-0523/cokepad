@@ -19,6 +19,7 @@ WORKDIR $APP_ROOT
 ADD Gemfile $APP_ROOT/Gemfile
 ADD Gemfile.lock $APP_ROOT/Gemfile.lock
 
+RUN gem install bundler
 RUN bundle install
 ADD ./src/ $APP_ROOT
 
