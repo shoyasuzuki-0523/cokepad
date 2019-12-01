@@ -16,7 +16,7 @@ class AppContainer extends Component {
   }
 
   signIn = (email, password) => {
-    axios.post('http://192.168.99.100:3001/auth/sign_in',{
+    axios.post('https://cokepadback.herokuapp.com/auth/sign_in',{
       email: email,
       password: password
     })
@@ -41,7 +41,7 @@ class AppContainer extends Component {
   }
 
   signUp = (name, email, password, passwordConfirmation) => {
-    axios.post('http://192.168.99.100:3001/auth',{
+    axios.post('https://cokepadback.herokuapp.com/auth',{
       name: name,
       email: email,
       password: password,
@@ -68,7 +68,7 @@ class AppContainer extends Component {
   }
 
   signOut = () => {
-    axios.delete('http://192.168.99.100:3001/auth/sign_out', {headers: this.state.token, data: {}})
+    axios.delete('https://cokepadback.herokuapp.com/auth/sign_out', {headers: this.state.token, data: {}})
     .then((response) => {
       console.log(response);
       this.setState({

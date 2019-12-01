@@ -19,7 +19,7 @@ class MainContainer extends Component {
 
   componentDidMount(){
     console.log(this.props);
-    axios.get('http://192.168.99.100:3001/posts')
+    axios.get('https://cokepadback.herokuapp.com/posts')
     .then((results) => {
       console.log(results)
       this.setState({posts: results.data})
@@ -30,7 +30,7 @@ class MainContainer extends Component {
   }
 
   createPost = (title, content) => {
-    axios.post('http://192.168.99.100:3001/posts',{title: title, content: content}, {headers: this.props.token})
+    axios.post('https://cokepadback.herokuapp.com/posts',{title: title, content: content}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
       const newData = update(this.state.posts, {$push:[response.data]});
@@ -43,7 +43,7 @@ class MainContainer extends Component {
   }
 
   deletePost = (id) => {
-    axios.delete(`http://192.168.99.100:3001/posts/${id}`,{headers: this.props.token, data: {}})
+    axios.delete(`https://cokepadback.herokuapp.com/posts/${id}`,{headers: this.props.token, data: {}})
     .then((response) => {
       console.log(response)
       const postIndex = this.state.posts.findIndex(post => post.id === parseInt(id, 10))
@@ -57,7 +57,7 @@ class MainContainer extends Component {
   }
 
   updatePost = (id, title, content) => {
-    axios.patch(`http://192.168.99.100:3001/posts/${id}`,{title: title, content: content}, {headers: this.props.token})
+    axios.patch(`https://cokepadback.herokuapp.com/posts/${id}`,{title: title, content: content}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
       const postIndex = this.state.posts.findIndex((x) => x.id === parseInt(id, 10))

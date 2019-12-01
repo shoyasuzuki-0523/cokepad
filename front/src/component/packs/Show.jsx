@@ -33,7 +33,7 @@ class Show extends Component {
 
   componentDidMount(){
     axios
-    .get(`http://192.168.99.100:3001/posts/${this.props.match.params.id}`)
+    .get(`https://cokepadback.herokuapp.com/posts/${this.props.match.params.id}`)
     .then((results) => {
       console.log(results);
 
@@ -73,7 +73,7 @@ class Show extends Component {
   }
 
   createComment = (content, post_id) => {
-    axios.post('http://192.168.99.100:3001/comments',{content: content, post_id: post_id}, {headers: this.props.token})
+    axios.post('https://cokepadback.herokuapp.com/comments',{content: content, post_id: post_id}, {headers: this.props.token})
     .then((response) => {
       console.log(response)
       const newData = update(this.state.posts.comments, {$push:[response.data]});
@@ -87,7 +87,7 @@ class Show extends Component {
 
   goodOn = () => {
     axios
-    .post(`http://192.168.99.100:3001/goods`,{id: this.state.post.id}, {headers: this.props.token})
+    .post(`https://cokepadback.herokuapp.com/goods`,{id: this.state.post.id}, {headers: this.props.token})
     .then((results) => {
       console.log(results);
       this.setState({
@@ -102,7 +102,7 @@ class Show extends Component {
 
   goodOff = () => {
     axios
-    .delete(`http://192.168.99.100:3001/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
+    .delete(`https://cokepadback.herokuapp.com/goods/${this.state.post.id}`,{headers: this.props.token, data: {}})
     .then((results) => {
       console.log(results)
       this.setState({

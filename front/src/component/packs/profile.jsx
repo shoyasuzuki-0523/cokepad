@@ -40,7 +40,7 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    axios.get(`http://192.168.99.100:3001/users/${this.props.id}`)
+    axios.get(`https://cokepadback.herokuapp.com/users/${this.props.id}`)
     .then((results) => {
       console.log(results)
       this.setState({user: results.data})
