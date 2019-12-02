@@ -34,15 +34,5 @@ module AppName
 
     #追記
     config.middleware.use ActionDispatch::Flash
-    config.middleware.use Rack::Cors do
-      allow do
-        origins '192.168.99.100:3000','example.com'
-    
-        resource '*',
-          headers: :any,
-          methods: [:get, :post, :put, :patch, :delete, :options, :head],
-          expose: ['access-token', 'client', 'uid', ]
-      end
-    end
   end
 end

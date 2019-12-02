@@ -14,6 +14,7 @@ RUN apt-get update -qq && \
 
 RUN mkdir /app_name 
 ENV APP_ROOT /app_name 
+ENV PORT ${PORT}
 WORKDIR $APP_ROOT
 
 ADD Gemfile $APP_ROOT/Gemfile
@@ -23,4 +24,6 @@ RUN gem install bundler
 RUN bundle install
 ADD ./src/ $APP_ROOT
 
-CMD ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "0.0.0.0"]
+EXPOSE 3000
+
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]

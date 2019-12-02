@@ -7,11 +7,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:3000','192.168.99.100:3000','example.com'
+    origins 'cokepad.herokuapp.com', '192.168.99.100:3000', 'herokuapp.com', 'cokepadback.com'
 
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
-      expose: ['access-token', 'client', 'uid', ]
+      expose: ['access-token', 'client', 'uid']
   end
 end

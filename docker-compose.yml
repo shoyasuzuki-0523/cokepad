@@ -12,15 +12,17 @@ services:
 
   back:
     build: ./back
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bundle exec rails s -p ${PORT} -b '0.0.0.0'
     volumes:
       - ./back/src:/app_name
     ports:
-      - "3001:3000"
+      - ${PORT}:${PORT}
     environment:
       DB_USERNAME: root
       DB_PASSWORD: password
       DB_HOSTNAME: db
+      EDITOR: vim
+      PORT: ${PORT}
     tty: true
     stdin_open: true
     links:
