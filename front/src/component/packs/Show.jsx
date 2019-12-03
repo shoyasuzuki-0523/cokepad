@@ -193,9 +193,6 @@ class Show extends Component {
               </Typography>
             </Grid>
             {this.editButton(this.state.post.user.id, this.props.currentUser.id)}
-            <Typography>
-              {this.state.goodCount}
-            </Typography>
           </Grid>
         </CardActions>
 
@@ -212,6 +209,9 @@ class Show extends Component {
           <br/><br/><br/>
           <Box my={2}>
             {this.goodBtn(this.props.currentUser.id)}
+            <Typography>
+              {this.state.goodCount}
+            </Typography>
           </Box>
         </CardContent>
 
