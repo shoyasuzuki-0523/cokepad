@@ -1,23 +1,25 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+
   def index
-    @post = Post.find(params[:id])
-    @comment = @post.comments
-    render @comment
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+    render json: @comments
   end
 
   def create
     @comment = Comment.create(
       content: params[:content],
       user_id: current_user.id,
-      post_id: params[:content]
+      post_id: params[:post_id]
     )
-    render @comment
+    render json: @comment
   end
 
   def update
     @comment = Comment.find(params[:id])
     @comment.update_attributes(content: params[:title])
-    render @comment
+    render json: @comment
   end
 
   def destroy
