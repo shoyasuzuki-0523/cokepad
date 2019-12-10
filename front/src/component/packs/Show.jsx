@@ -210,7 +210,7 @@ class Show extends Component {
           <Box my={2}>
             {this.goodBtn(this.props.currentUser.id)}
             <Typography>
-              {this.state.goodCount}
+              {/*this.state.goodCount*/}
             </Typography>
           </Box>
         </CardContent>
