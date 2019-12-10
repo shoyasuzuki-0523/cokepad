@@ -13,16 +13,18 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       posts: []
     };
   }
 
   componentDidMount(){
     console.log(this.props);
+    this.setState({loading: true});
     axios.get('https://cokepadback.herokuapp.com/posts')
     .then((results) => {
       console.log(results)
-      this.setState({posts: results.data})
+      this.setState({loading: false, posts: results.data})
     })
     .catch((data) =>{
       console.log(data)
@@ -74,7 +76,7 @@ class MainContainer extends Component {
     return(
       <div>
         <Container fixed>
-          <Route exact path='/' render={ () => <Index posts={this.state.posts} getPosts={this.getPosts} createPost={this.createPost} />}/>
+          <Route exact path='/' render={ () => <Index loading={this.state.loading} posts={this.state.posts} getPosts={this.getPosts} createPost={this.createPost} />}/>
           <Route exact path="/posts/:id/show" render={ ({match}) => <Show token={this.props.token} deletePost={this.deletePost} match={match} currentUser={this.props.currentUser}/> }/>
           <Route exact path='/posts/:id/update' render={ ({match}) => <Update updatePost={this.updatePost} match={match}/>}/>
           <Route path='/Profile/:id' render={({match}) => <Profile match={match} id={this.props.currentUser.id}/>}/>
