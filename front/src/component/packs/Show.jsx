@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CommentForm from '../component/CommentForm';
-import Comment from '../component/Comment';
+import CommentList from '../component/CommentList';
 
 class Show extends Component {
   constructor(props){
@@ -221,8 +221,7 @@ class Show extends Component {
           <h3>
             コメントを書く
           </h3>
-          <CommentForm createComment={this.createComment}/>
-          <CommentList/>
+          {/*<CommentForm createComment={this.createComment}/>*/}
         </CardContent>
       </Card>
     );

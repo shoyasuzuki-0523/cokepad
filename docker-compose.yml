@@ -23,7 +23,6 @@ services:
       DB_PASSWORD: password
       DB_HOSTNAME: db
       EDITOR: vim
-      PORT: ${PORT}
     tty: true
     stdin_open: true
     links:
