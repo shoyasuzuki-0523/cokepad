@@ -14,7 +14,6 @@ RUN apt-get update -qq && \
 
 RUN mkdir /app_name 
 ENV APP_ROOT /app_name 
-ENV PORT ${PORT}
 WORKDIR $APP_ROOT
 
 ADD Gemfile $APP_ROOT/Gemfile
